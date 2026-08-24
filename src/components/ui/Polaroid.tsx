@@ -24,9 +24,17 @@ export default function Polaroid({
   sizes = "(min-width: 768px) 320px, 60vw",
   priority = false,
 }: PolaroidProps) {
+  // A CSS position utility (e.g. "absolute" from a caller doing manual
+  // placement) must fully replace the default "relative" rather than
+  // combine with it — two position classes on one element is a same-
+  // specificity conflict resolved by Tailwind's internal stylesheet order,
+  // not by the order classes appear here, so it's not safe to just
+  // concatenate both.
+  const hasPositionOverride = /(^|\s)(static|relative|absolute|fixed|sticky)(\s|$)/.test(className);
+
   return (
     <figure
-      className={`relative bg-white p-2.5 pb-8 rounded-[2px] shadow-[0_10px_24px_rgba(16,34,56,0.18)] ${className}`}
+      className={`${hasPositionOverride ? "" : "relative "}bg-white p-2.5 pb-8 rounded-[2px] shadow-[0_10px_24px_rgba(16,34,56,0.18)] ${className}`}
       style={{ transform: `rotate(${rotation}deg)` }}
     >
       {tape && (

@@ -18,7 +18,13 @@ const COLORS = {
   cream: "#F8F2E8",
 };
 
+function escapeXml(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 function svg({ w = 1200, h = 900, from, to, label, sub }) {
+  label = escapeXml(label);
+  sub = escapeXml(sub);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">

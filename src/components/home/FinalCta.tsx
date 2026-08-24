@@ -27,7 +27,7 @@ function CirclePart() {
 export default function FinalCta() {
   return (
     <section className="bg-blue">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-12 px-5 py-16 sm:px-10 md:px-16 md:py-24 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-5 py-16 sm:px-10 md:px-16 md:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-6">
         <h2 className="max-w-sm text-3xl font-extrabold leading-tight text-cream sm:text-4xl">
           come watch.
           <br />
@@ -36,7 +36,7 @@ export default function FinalCta() {
           come be <CirclePart /> of it.
         </h2>
 
-        <div className="relative mx-auto flex h-56 w-full max-w-xs items-center justify-center sm:h-64 sm:max-w-sm lg:mx-0 lg:h-72 lg:max-w-none lg:flex-1">
+        <div className="relative mx-auto flex h-56 w-full max-w-xs items-center justify-center sm:h-64 sm:max-w-sm lg:h-72">
           <Polaroid
             image={IMAGES.ctaMovieNight.src}
             alt={IMAGES.ctaMovieNight.alt}

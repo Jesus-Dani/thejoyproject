@@ -12,7 +12,7 @@
   <rect width="1200" height="1000" fill="url(#g)"/>
   <rect width="1200" height="1000" fill="url(#grain)"/>
   <g font-family="Arial, sans-serif" text-anchor="middle">
-    <text x="600" y="492" font-size="55" font-weight="700" fill="#102238" opacity="0.55">Impact — inclusion & joy</text>
+    <text x="600" y="492" font-size="55" font-weight="700" fill="#102238" opacity="0.55">Impact — inclusion &amp; joy</text>
     <text x="600" y="534" font-size="29" fill="#102238" opacity="0.4">placeholder — real event photography TBD</text>
   </g>
 </svg>
