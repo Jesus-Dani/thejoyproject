@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F4D98B"/>
+      <stop offset="100%" stop-color="#F8F2E8"/>
+    </linearGradient>
+    <pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="transparent"/>
+      <circle cx="1" cy="1" r="0.6" fill="#102238" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <rect width="800" height="600" fill="url(#grain)"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="400" y="292" font-size="36" font-weight="700" fill="#102238" opacity="0.55">Students together</text>
+    <text x="400" y="334" font-size="19" fill="#102238" opacity="0.4">placeholder — real event photography TBD</text>
+  </g>
+</svg>

@@ -1,0 +1,821 @@
+<title>Joy Project Design System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+  :root {
+    --bg: #F8F2E8;
+    --bg-raised: #FFFFFF;
+    --bg-sunken: #F1E9DB;
+    --ink: #102238;
+    --ink-soft: rgba(16, 34, 56, 0.62);
+    --ink-faint: rgba(16, 34, 56, 0.38);
+    --border: rgba(16, 34, 56, 0.13);
+    --card-bg: #FFFFFF;
+    --link: #2C5C82;
+
+    /* fixed brand accents — constants, not theme-adaptive */
+    --pink: #F3B6C5;
+    --green: #C7D1A7;
+    --blue: #3D78A8;
+    --yellow: #F4D98B;
+    --on-accent: #102238;
+
+    --radius-card: 8px;
+    --radius-button: 4px;
+    --container-max: 1160px;
+
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-hand: "Caveat", cursive;
+
+    --ease-natural: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-fast: 180ms;
+    --duration-normal: 350ms;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1B2C;
+      --bg-raised: #16273D;
+      --bg-sunken: #0A1420;
+      --ink: #F8F2E8;
+      --ink-soft: rgba(248, 242, 232, 0.66);
+      --ink-faint: rgba(248, 242, 232, 0.4);
+      --border: rgba(248, 242, 232, 0.14);
+      --card-bg: #16273D;
+      --link: #8FBEE0;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0E1B2C;
+    --bg-raised: #16273D;
+    --bg-sunken: #0A1420;
+    --ink: #F8F2E8;
+    --ink-soft: rgba(248, 242, 232, 0.66);
+    --ink-faint: rgba(248, 242, 232, 0.4);
+    --border: rgba(248, 242, 232, 0.14);
+    --card-bg: #16273D;
+    --link: #8FBEE0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--pink); color: var(--on-accent); }
+
+  a { color: var(--link); }
+  a:focus-visible, button:focus-visible, .swatch:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; margin: 0; }
+
+  .wrap {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-inline: clamp(20px, 5vw, 56px);
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 14px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+  .brand .tag {
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
+    color: var(--blue);
+    font-weight: 600;
+  }
+  nav.jump {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav.jump::-webkit-scrollbar { display: none; }
+  nav.jump a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 8px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background var(--duration-fast) var(--ease-natural), color var(--duration-fast) var(--ease-natural);
+  }
+  nav.jump a:hover { background: var(--bg-sunken); color: var(--ink); }
+
+  /* ---------- intro ---------- */
+  .intro {
+    padding-block: clamp(40px, 7vw, 76px) clamp(32px, 5vw, 56px);
+    display: grid;
+    gap: 18px;
+    max-width: 760px;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .intro h1 {
+    font-size: clamp(2.25rem, 4.6vw, 3.4rem);
+    line-height: 1.02;
+    font-weight: 800;
+  }
+  .intro p {
+    font-size: 1.125rem;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+  .source-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8125rem;
+    color: var(--ink-faint);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    width: fit-content;
+  }
+
+  /* ---------- sections ---------- */
+  section.block {
+    padding-block: clamp(40px, 6vw, 64px);
+    border-top: 1px solid var(--border);
+  }
+  .block-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-bottom: clamp(24px, 4vw, 40px);
+    scroll-margin-top: 84px;
+  }
+  .block-head h2 {
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    color: var(--ink);
+  }
+  .block-head .desc {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+
+  /* ---------- color ---------- */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .swatch {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--card-bg);
+  }
+  .swatch .fill {
+    height: 92px;
+  }
+  .swatch .meta {
+    padding: 12px 14px 14px;
+    display: grid;
+    gap: 3px;
+  }
+  .swatch .name { font-weight: 700; font-size: 0.9rem; }
+  .swatch .hex {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+  }
+  .swatch .use {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .neutral-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  /* ---------- type ---------- */
+  .type-row {
+    display: grid;
+    grid-template-columns: 108px 1fr;
+    gap: 20px;
+    align-items: baseline;
+    padding-block: 18px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-label {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+  }
+  .type-label b { display: block; color: var(--ink-soft); font-size: 0.8125rem; }
+  .t-display { font-size: clamp(2.4rem, 6vw, 4.6rem); font-weight: 800; line-height: 0.98; letter-spacing: -0.01em; }
+  .t-h2 { font-size: clamp(1.7rem, 3vw, 2.1rem); font-weight: 800; line-height: 1.08; }
+  .t-h3 { font-size: 1.375rem; font-weight: 700; }
+  .t-body { font-size: 1.125rem; color: var(--ink); max-width: 52ch; }
+  .t-small { font-size: 0.875rem; color: var(--ink-soft); }
+  .t-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+  .t-hand { font-family: var(--font-hand); font-weight: 600; font-size: 1.9rem; color: var(--blue); line-height: 1.15; }
+
+  .type-usage {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .usage-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 16px 18px;
+    background: var(--card-bg);
+  }
+  .usage-card .face {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+  }
+  .usage-card .sample-inter { font-family: var(--font-body); font-size: 1.05rem; }
+  .usage-card .sample-hand { font-family: var(--font-hand); font-size: 1.6rem; color: var(--blue); }
+  .usage-card ul { margin: 10px 0 0; padding-left: 18px; font-size: 0.85rem; color: var(--ink-soft); }
+  .usage-card li { margin-bottom: 3px; }
+
+  /* ---------- texture ---------- */
+  .texture-demo {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  @media (max-width: 760px) { .texture-demo { grid-template-columns: 1fr; } }
+
+  .scrap {
+    position: relative;
+    background: var(--bg-sunken);
+    border-radius: var(--radius-card);
+    padding: 44px 28px;
+    min-height: 260px;
+  }
+  .polaroid {
+    position: absolute;
+    background: #fff;
+    padding: 10px 10px 34px;
+    border-radius: 3px;
+    box-shadow: 0 10px 24px rgba(16, 34, 56, 0.18);
+    width: 168px;
+  }
+  .polaroid .photo {
+    height: 128px;
+    border-radius: 1px;
+    background: linear-gradient(135deg, var(--pink), var(--green));
+  }
+  .polaroid.p1 { top: 18px; left: 8%; transform: rotate(-6deg); }
+  .polaroid.p2 { bottom: 18px; right: 6%; transform: rotate(4deg); z-index: 2; }
+  .tape {
+    position: absolute;
+    width: 56px;
+    height: 22px;
+    background: color-mix(in srgb, var(--yellow) 80%, transparent);
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    opacity: 0.85;
+  }
+  .note-card {
+    position: absolute;
+    bottom: -14px;
+    left: 46%;
+    background: var(--yellow);
+    color: var(--on-accent);
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    line-height: 1.25;
+    padding: 12px 16px;
+    border-radius: 2px;
+    width: 150px;
+    transform: rotate(3deg);
+    box-shadow: 0 8px 18px rgba(16, 34, 56, 0.16);
+  }
+  .underline-demo {
+    display: inline-block;
+    position: relative;
+    font-weight: 700;
+  }
+  .underline-demo svg { position: absolute; left: 0; bottom: -6px; width: 100%; height: 8px; }
+
+  .ratio-meter {
+    display: grid;
+    gap: 10px;
+  }
+  .ratio-bar {
+    height: 14px;
+    border-radius: 999px;
+    background: var(--bg-sunken);
+    overflow: hidden;
+    display: flex;
+  }
+  .ratio-bar span:first-child { background: var(--ink); width: 85%; }
+  .ratio-bar span:last-child { background: var(--pink); width: 15%; }
+  .ratio-legend { display: flex; gap: 18px; font-size: 0.8rem; color: var(--ink-soft); }
+  .ratio-legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; }
+
+  /* ---------- components ---------- */
+  .comp-block { margin-bottom: 44px; }
+  .comp-block:last-child { margin-bottom: 0; }
+  .comp-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    padding: 13px 24px;
+    border-radius: var(--radius-button);
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+  }
+  .btn-navy { background: var(--ink); color: var(--bg); }
+  .btn-pink { background: var(--pink); color: var(--on-accent); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-text { background: none; border: none; padding: 0; color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+  .event-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+  .event-card {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+  }
+  .event-card .thumb {
+    height: 110px;
+    position: relative;
+  }
+  .event-card.theme-pink .thumb { background: linear-gradient(160deg, var(--pink), #eaa2b8); }
+  .event-card.theme-green .thumb { background: linear-gradient(160deg, var(--green), #a9b686); }
+  .event-card .num {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--on-accent);
+    color: var(--bg);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .event-card .body { padding: 16px; }
+  .event-card .title { font-weight: 800; font-size: 1rem; letter-spacing: 0.01em; }
+  .event-card .sub { font-family: var(--font-hand); font-size: 1.15rem; color: var(--blue); margin: 4px 0 10px; }
+  .event-card .meta { font-size: 0.78rem; color: var(--ink-soft); display: grid; gap: 2px; }
+  .event-card .cta { margin-top: 12px; font-size: 0.8rem; font-weight: 700; color: var(--link); }
+
+  .props-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    margin-top: 14px;
+  }
+  .props-table th, .props-table td {
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .props-table th { color: var(--ink-faint); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .props-table code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.8em; color: var(--ink-soft); }
+  .table-scroll { overflow-x: auto; }
+
+  /* ---------- spacing / layout ---------- */
+  .scale-grid { display: grid; gap: 10px; }
+  .scale-row { display: grid; grid-template-columns: 90px 1fr 60px; align-items: center; gap: 14px; }
+  .scale-row .bar { height: 10px; background: var(--blue); border-radius: 999px; }
+  .scale-row .val { font-variant-numeric: tabular-nums; font-size: 0.8rem; color: var(--ink-soft); text-align: right; }
+  .scale-row .name { font-size: 0.82rem; color: var(--ink-soft); }
+
+  .bp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .bp-card { border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px; background: var(--card-bg); }
+  .bp-card .range { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 0.95rem; }
+  .bp-card .label { font-size: 0.78rem; color: var(--ink-faint); margin-top: 3px; }
+
+  /* ---------- motion ---------- */
+  .motion-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .motion-card { border: 1px solid var(--border); border-radius: var(--radius-card); padding: 18px; background: var(--card-bg); }
+  .motion-card h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
+  .lift-demo {
+    background: var(--bg-sunken);
+    border-radius: var(--radius-card);
+    padding: 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    transition: transform var(--duration-normal) var(--ease-natural), box-shadow var(--duration-normal) var(--ease-natural);
+  }
+  .lift-demo:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(16,34,56,0.16); }
+  .allow-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; font-size: 0.85rem; }
+  .allow-list li { display: flex; gap: 8px; align-items: flex-start; }
+  .allow-list.yes li::before { content: "✓"; color: var(--green); font-weight: 800; filter: brightness(0.6) saturate(2); }
+  .allow-list.no li::before { content: "×"; color: #c96b6b; font-weight: 800; }
+
+  /* ---------- z-index ---------- */
+  .zstack { display: grid; gap: 6px; max-width: 420px; }
+  .zrow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 9px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    background: var(--bg-sunken);
+  }
+  .zrow b { font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+
+  /* ---------- checklist ---------- */
+  .qa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .qa-card { border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px 18px; background: var(--card-bg); }
+  .qa-card h4 { font-size: 0.82rem; font-weight: 700; margin-bottom: 10px; }
+  .qa-card ul { margin: 0; padding-left: 18px; font-size: 0.85rem; color: var(--ink-soft); display: grid; gap: 5px; }
+
+  footer.page {
+    padding-block: 40px 60px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand"><span>the joy project</span><span class="tag">✦ design system</span></div>
+    <nav class="jump">
+      <a href="#color">Color</a>
+      <a href="#type">Type</a>
+      <a href="#texture">Texture</a>
+      <a href="#components">Components</a>
+      <a href="#layout">Layout</a>
+      <a href="#motion">Motion</a>
+      <a href="#qa">QA</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="intro">
+    <span class="eyebrow">Reference · v1</span>
+    <h1>Joy Project Design System</h1>
+    <p>The visual language for the Barbie Movie Marathon and Charity Match site — scrapbook warmth, editorial structure, built to feel like a memory rather than a marketing campaign. Use this page as the source of truth while building screens.</p>
+    <span class="source-note">🩷 Derived from the approved build spec · applies to Home, Events, Get Involved, and the ticket flow</span>
+  </div>
+</div>
+
+<section class="block" id="color">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Color</h2>
+      <p class="desc">One warm ground, one ink, four accents. Pink belongs to the movie marathon, green to the match — never swap them.</p>
+    </div>
+
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="fill" style="background:var(--pink)"></div>
+        <div class="meta"><span class="name">Soft Pink</span><span class="hex">#F3B6C5</span><span class="use">Barbie event, hero accent, handwritten annotations, CTA decoration</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:var(--green)"></div>
+        <div class="meta"><span class="name">Muted Green</span><span class="hex">#C7D1A7</span><span class="use">Charity match, match-related accents, secondary backgrounds</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:var(--blue)"></div>
+        <div class="meta"><span class="name">Soft Blue</span><span class="hex">#3D78A8</span><span class="use">Final CTA section, hand-drawn underlines, links</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:var(--yellow)"></div>
+        <div class="meta"><span class="name">Paper Yellow</span><span class="hex">#F4D98B</span><span class="use">Paper notes, small highlights — used sparingly</span></div>
+      </div>
+    </div>
+
+    <div class="neutral-strip">
+      <div class="swatch">
+        <div class="fill" style="background:var(--bg); border-bottom:1px solid var(--border)"></div>
+        <div class="meta"><span class="name">Cream ground</span><span class="hex">#F8F2E8</span><span class="use">Primary background — never stark white</span></div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:var(--ink)"></div>
+        <div class="meta"><span class="name">Deep Navy</span><span class="hex">#102238</span><span class="use">Text, headings, nav, primary buttons</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="type">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Type</h2>
+      <p class="desc">Inter carries structure. Caveat carries personality — sparingly, on selected headings and annotations only, never for anything that must stay highly legible.</p>
+    </div>
+
+    <div class="type-row">
+      <div class="type-label"><b>Display</b>64–88px<br>800</div>
+      <div class="t-display">remember when joy was this easy?</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label"><b>H2</b>32–34px<br>800</div>
+      <div class="t-h2">two events. one really good reason.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label"><b>H3</b>22px<br>700</div>
+      <div class="t-h3">BARBIE MOVIE MARATHON</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label"><b>Body</b>18–20px<br>400</div>
+      <div class="t-body">We're bringing back the things we loved growing up — movies, football, friends and feel-good chaos. All for a reason that matters.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label"><b>Small</b>14px<br>400–500</div>
+      <div class="t-small">Saturday, September 26 · SEAP · 100 seats per showing</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label"><b>Label</b>12px<br>700, tracked</div>
+      <div class="t-label">Get the details</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label"><b>Handwritten</b>Caveat 600</div>
+      <div class="t-hand">and yes, Barbie is involved.</div>
+    </div>
+
+    <div class="type-usage">
+      <div class="usage-card">
+        <div class="face">Inter — structure</div>
+        <div class="sample-inter">Navigation, body copy, dates, times, locations, buttons, form labels.</div>
+        <ul><li>Weights 400 / 600 / 700 / 800</li><li>Everything that must stay legible</li></ul>
+      </div>
+      <div class="usage-card">
+        <div class="face">Caveat — personality</div>
+        <div class="sample-hand">handwritten notes &amp; captions</div>
+        <ul><li>Selected section headings only</li><li>Annotations, memory notes, subtitles</li><li>Never for essential information</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="texture">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Texture &amp; materials</h2>
+      <p class="desc">The site should feel like a physical scrapbook page — Polaroids, tape, paper notes, imperfect underlines. Discovered, not systematic.</p>
+    </div>
+
+    <div class="texture-demo">
+      <div class="scrap">
+        <div class="tape"></div>
+        <div class="polaroid p1"><div class="photo"></div></div>
+        <div class="polaroid p2"><div class="photo"></div></div>
+        <div class="note-card">good friends. great times.</div>
+      </div>
+
+      <div class="ratio-meter">
+        <p class="t-small" style="margin:0 0 4px">Handmade-to-clean ratio</p>
+        <div class="ratio-bar"><span></span><span></span></div>
+        <div class="ratio-legend">
+          <span><span class="dot" style="background:var(--ink)"></span>85% clean interface</span>
+          <span><span class="dot" style="background:var(--pink)"></span>15% handmade detail</span>
+        </div>
+        <p class="t-small" style="margin-top:10px">Example hand-drawn underline:</p>
+        <span class="underline-demo t-h3" style="font-size:1.3rem">Home
+          <svg viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M2 5 Q 30 1, 55 4 T 98 3" fill="none" stroke="var(--blue)" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="components">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Components</h2>
+      <p class="desc">Squared-off, paper-like — never glassmorphism, heavy drop shadows, or oversized pills.</p>
+    </div>
+
+    <div class="comp-block">
+      <div class="comp-label">Buttons</div>
+      <div class="btn-row">
+        <button class="btn btn-navy">Get Your Ticket</button>
+        <button class="btn btn-pink">Join The Joy</button>
+        <button class="btn btn-ghost">See The Events</button>
+        <a class="btn-text" href="#">See the events →</a>
+      </div>
+      <table class="props-table">
+        <thead><tr><th>Variant</th><th>Background</th><th>Text</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td>Navy</td><td><code>--ink</code></td><td><code>--bg</code></td><td>Primary nav CTA, final CTA</td></tr>
+          <tr><td>Pink</td><td><code>--pink</code></td><td><code>--on-accent</code></td><td>Hero primary action</td></tr>
+          <tr><td>Ghost</td><td>transparent</td><td><code>--ink</code></td><td>Secondary, low-emphasis</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="comp-block">
+      <div class="comp-label">Event card</div>
+      <div class="event-cards">
+        <div class="event-card theme-pink">
+          <div class="thumb"><span class="num">01</span></div>
+          <div class="body">
+            <div class="title">BARBIE MOVIE MARATHON</div>
+            <div class="sub">popcorn. pink. questionable singing.</div>
+            <div class="meta">Saturday, Sept 26 · SEAP<br>Showings from 10:00am</div>
+            <div class="cta">GET THE DETAILS →</div>
+          </div>
+        </div>
+        <div class="event-card theme-green">
+          <div class="thumb"><span class="num">02</span></div>
+          <div class="body">
+            <div class="title">CHARITY MATCH</div>
+            <div class="sub">pick your team. bring the noise.</div>
+            <div class="meta">Friday, Sept 25 · Main Field<br>Kickoff 3:00pm</div>
+            <div class="cta">GET THE DETAILS →</div>
+          </div>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="props-table">
+          <thead><tr><th>Prop</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td><code>number</code></td><td><code>string</code></td></tr>
+            <tr><td><code>theme</code></td><td><code>"pink" | "green"</code></td></tr>
+            <tr><td><code>title, description</code></td><td><code>string</code></td></tr>
+            <tr><td><code>date, time, location</code></td><td><code>string</code></td></tr>
+            <tr><td><code>href</code></td><td><code>string</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="layout">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Spacing &amp; layout</h2>
+      <p class="desc">Centered container, generous section rhythm, three responsive tiers.</p>
+    </div>
+
+    <div class="scale-grid" style="margin-bottom:32px">
+      <div class="scale-row"><span class="name">Container max</span><div class="bar" style="width:100%"></div><span class="val">1440px</span></div>
+      <div class="scale-row"><span class="name">Inline padding</span><div class="bar" style="width:35%"></div><span class="val">40–64px</span></div>
+      <div class="scale-row"><span class="name">Section padding</span><div class="bar" style="width:60%"></div><span class="val">96px</span></div>
+      <div class="scale-row"><span class="name">Section padding (mobile)</span><div class="bar" style="width:30%"></div><span class="val">56px</span></div>
+      <div class="scale-row"><span class="name">Card radius</span><div class="bar" style="width:6%"></div><span class="val">8px</span></div>
+      <div class="scale-row"><span class="name">Button radius</span><div class="bar" style="width:3%"></div><span class="val">4px</span></div>
+    </div>
+
+    <div class="bp-cards">
+      <div class="bp-card"><div class="range">≥ 1024px</div><div class="label">Desktop — full composition</div></div>
+      <div class="bp-card"><div class="range">768–1023px</div><div class="label">Tablet — cards stay side-by-side</div></div>
+      <div class="bp-card"><div class="range">&lt; 768px</div><div class="label">Mobile — recomposed, not scaled down</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="motion">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Motion</h2>
+      <p class="desc">Calm and purposeful. <code style="font-size:0.85em">ease: cubic-bezier(0.22, 1, 0.36, 1)</code> · fast 180ms · normal 350ms.</p>
+    </div>
+    <div class="motion-grid">
+      <div class="motion-card">
+        <h4>Try hovering</h4>
+        <div class="lift-demo">Card lift, 2–4px</div>
+      </div>
+      <div class="motion-card">
+        <h4>Allowed</h4>
+        <ul class="allow-list yes">
+          <li>Fade-in, slight upward movement</li>
+          <li>Small photo parallax</li>
+          <li>Image scale 1.01–1.03 on hover</li>
+          <li>Underline animation</li>
+        </ul>
+      </div>
+      <div class="motion-card">
+        <h4>Avoid</h4>
+        <ul class="allow-list no">
+          <li>Bouncing, spinning, floating stickers</li>
+          <li>Constant/ambient background movement</li>
+          <li>Flashy transitions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="comp-label" style="margin-top:36px">Stacking order</div>
+    <div class="zstack">
+      <div class="zrow"><span>Base page</span><b>0</b></div>
+      <div class="zrow"><span>Background texture</span><b>1</b></div>
+      <div class="zrow"><span>Content</span><b>2</b></div>
+      <div class="zrow"><span>Main photo</span><b>3</b></div>
+      <div class="zrow"><span>Overlapping photo</span><b>4</b></div>
+      <div class="zrow"><span>Memory note</span><b>5</b></div>
+      <div class="zrow"><span>Decorative tape</span><b>6</b></div>
+      <div class="zrow"><span>Hand-drawn annotation</span><b>7</b></div>
+      <div class="zrow"><span>Navigation</span><b>20</b></div>
+      <div class="zrow"><span>Mobile menu</span><b>50</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="qa">
+  <div class="wrap">
+    <div class="block-head">
+      <h2>Before you ship it</h2>
+      <p class="desc">Two lenses — does it still feel like the Joy Project, and does it still feel handmade rather than generated.</p>
+    </div>
+    <div class="qa-grid">
+      <div class="qa-card">
+        <h4>Audience &amp; tone</h4>
+        <ul>
+          <li>Boys visibly present in the Barbie experience</li>
+          <li>Girls visibly present in the football match</li>
+          <li>No section reads as a donation ask</li>
+          <li>Feels like a university event, not an NGO campaign</li>
+        </ul>
+      </div>
+      <div class="qa-card">
+        <h4>Anti-AI check</h4>
+        <ul>
+          <li>Every section perfectly symmetrical? Add asymmetry.</li>
+          <li>Every element decorated? Remove some.</li>
+          <li>Handwritten font everywhere? Reduce it.</li>
+          <li>Photos look like stock? Replace with candid shots.</li>
+        </ul>
+      </div>
+      <div class="qa-card">
+        <h4>Accessibility</h4>
+        <ul>
+          <li>Visible focus states on every interactive element</li>
+          <li>Alt text on all meaningful images</li>
+          <li>Handwritten type never used for essential info</li>
+          <li><code>prefers-reduced-motion</code> respected</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="page">the joy project ♡ — design system reference, kept in sync with the approved build spec</footer>

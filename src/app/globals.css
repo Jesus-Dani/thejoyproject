@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --color-cream: #f8f2e8;
+  --color-navy: #102238;
+  --color-pink: #f3b6c5;
+  --color-green: #c7d1a7;
+  --color-blue: #3d78a8;
+  --color-yellow: #f4d98b;
+}
+
+@theme inline {
+  --color-cream: var(--color-cream);
+  --color-navy: var(--color-navy);
+  --color-pink: var(--color-pink);
+  --color-green: var(--color-green);
+  --color-blue: var(--color-blue);
+  --color-yellow: var(--color-yellow);
+
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+
+  --radius-card: 8px;
+  --radius-button: 4px;
+
+  --ease-natural: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-navy);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: var(--color-navy);
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
