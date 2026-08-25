@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ received: true });
   }
 
-  // Record Paystack's actual fee for bookkeeping (buyer was not charged it —
+  // Record Paystack's actual fee for bookkeeping (buyer was not charged it,
   // see README "Payment fees").
   const paystackFeeNgn = typeof event.data?.fees === "number" ? event.data.fees / 100 : null;
   if (paystackFeeNgn !== null) {
@@ -92,7 +92,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ received: true });
   }
 
-  // status === 'success' — create the admissions rows and deliver tickets.
+  // status === 'success': create the admissions rows and deliver tickets.
   const sessionIds: string[] = [];
   if (ticketType?.includes_match) {
     const { data: matchSession } = await supabase.from("sessions").select("id").eq("type", "match").single();

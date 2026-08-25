@@ -17,7 +17,7 @@ const STROKE: Record<string, string> = {
   navy: "var(--color-navy)",
 };
 
-/** Imperfect hand-drawn underline — never a straight CSS border. */
+/** Imperfect hand-drawn underline: never a straight CSS border. */
 export default function HandDrawnUnderline({
   color = "blue",
   variant = "a",

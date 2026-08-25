@@ -26,7 +26,7 @@ export default function Polaroid({
 }: PolaroidProps) {
   // A CSS position utility (e.g. "absolute" from a caller doing manual
   // placement) must fully replace the default "relative" rather than
-  // combine with it — two position classes on one element is a same-
+  // combine with it: two position classes on one element is a same-
   // specificity conflict resolved by Tailwind's internal stylesheet order,
   // not by the order classes appear here, so it's not safe to just
   // concatenate both.

@@ -19,7 +19,7 @@ export function generateAdmissionToken(): string {
 
 /**
  * The value actually encoded in the QR image: `token.signature`. Cheap
- * defense-in-depth (TRD §6) — the scan endpoint rejects a bad signature
+ * defense-in-depth (TRD §6): the scan endpoint rejects a bad signature
  * before ever hitting the database.
  */
 export function buildQrPayload(token: string): string {
@@ -38,7 +38,7 @@ export function parseQrPayload(payload: string): string | null {
 }
 
 /**
- * PNG buffer for email attachment. Attached (not inlined as a data URI) —
+ * PNG buffer for email attachment. Attached (not inlined as a data URI):
  * several major email clients strip/block data: URIs in HTML bodies, so an
  * attachment is the reliable delivery path for TRD §6.
  */

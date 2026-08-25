@@ -10,9 +10,16 @@ export default function ImpactSection() {
           why we&rsquo;re doing this
         </h2>
 
-        <div className="relative lg:col-start-2 lg:row-start-1 lg:row-span-2">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card">
-            <Image src={IMAGES.impact.src} alt={IMAGES.impact.alt} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
+        <div className="relative mx-auto w-full max-w-[280px] lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:mx-0 lg:max-w-[320px]">
+          <div className="overflow-hidden rounded-[4px] border-[6px] border-white bg-cream shadow-[0_18px_40px_rgba(16,34,56,0.22)]">
+            <Image
+              src={IMAGES.impact.src}
+              alt={IMAGES.impact.alt}
+              width={667}
+              height={1000}
+              sizes="(min-width: 1024px) 320px, 280px"
+              className="h-auto w-full object-contain"
+            />
           </div>
           <div className="absolute -bottom-6 -right-4 sm:-right-6">
             <div className="relative">
@@ -33,7 +40,7 @@ export default function ImpactSection() {
         <div className="max-w-lg space-y-5 text-lg leading-relaxed text-navy/80 lg:col-start-1 lg:row-start-2">
           <p>
             The Joy Project exists to create moments of happiness and
-            connection — and to use those moments to support and empower
+            connection, and to use those moments to support and empower
             children with disabilities.
           </p>
           <p>

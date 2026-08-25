@@ -16,7 +16,7 @@ function getFrom(): string {
 }
 
 function sessionLabel(session: SessionRow): string {
-  const kind = session.type === "match" ? "Charity Match" : `Barbie Marathon — ${session.name}`;
+  const kind = session.type === "match" ? "Charity Match" : `Barbie Marathon: ${session.name}`;
   return `${kind} · ${session.event_date} · ${session.start_time}–${session.end_time} · ${session.venue}`;
 }
 
@@ -40,7 +40,7 @@ export async function sendConfirmationEmail(params: {
   const linesHtml = [...bySession.values()]
     .map(
       ({ session, count }) =>
-        `<li>${sessionLabel(session)} — ${count} ticket${count > 1 ? "s" : ""} attached</li>`
+        `<li>${sessionLabel(session)}: ${count} ticket${count > 1 ? "s" : ""} attached</li>`
     )
     .join("");
 
@@ -48,11 +48,11 @@ export async function sendConfirmationEmail(params: {
     <div style="font-family:Arial,sans-serif;color:#102238;max-width:520px;margin:0 auto">
       <h1 style="font-size:20px">You&rsquo;re in, ${escapeHtml(buyerName)} 🎉</h1>
       <p>Thanks for grabbing a ticket to The Joy Project. Here's your order:</p>
-      <p><strong>${escapeHtml(ticketTypeName)}</strong> — ${quantity} × — ${NGN.format(totalAmountNgn)} total</p>
+      <p><strong>${escapeHtml(ticketTypeName)}</strong>: ${quantity} x ${NGN.format(totalAmountNgn)} total</p>
       <ul>${linesHtml}</ul>
-      <p>Your QR code${admissions.length > 1 ? "s are" : " is"} attached to this email — one per admission. Show it at the door; each code can only be scanned once.</p>
-      <p style="color:#6b6b6b;font-size:13px;margin-top:24px">All sales are final — no refunds, except in the rare case a showing sells out in the seconds before your payment clears (you'd be refunded automatically and notified separately). See our Terms &amp; FAQ page for details.</p>
-      <p style="margin-top:24px">See you there — the joy project ♡</p>
+      <p>Your QR code${admissions.length > 1 ? "s are" : " is"} attached to this email, one per admission. Show it at the door; each code can only be scanned once.</p>
+      <p style="color:#6b6b6b;font-size:13px;margin-top:24px">All sales are final, no refunds, except in the rare case a showing sells out in the seconds before your payment clears (you'd be refunded automatically and notified separately). See our Terms &amp; FAQ page for details.</p>
+      <p style="margin-top:24px">See you there, the joy project ♡</p>
     </div>
   `;
 
@@ -76,15 +76,15 @@ export async function sendOversoldApologyEmail(params: {
   const html = `
     <div style="font-family:Arial,sans-serif;color:#102238;max-width:520px;margin:0 auto">
       <h1 style="font-size:20px">We&rsquo;re sorry, ${escapeHtml(params.buyerName)}</h1>
-      <p>${escapeHtml(params.showingLabel)} sold out moments before your payment cleared. We know that's frustrating — you've been refunded in full, and the refund should land back on your original payment method shortly.</p>
-      <p>We&rsquo;d love to have you at a different showing or the match instead — head back to the site whenever you're ready to pick another time.</p>
-      <p style="margin-top:24px">Sorry again, and thank you for your patience — the joy project ♡</p>
+      <p>${escapeHtml(params.showingLabel)} sold out moments before your payment cleared. We know that's frustrating, and you've been refunded in full; the refund should land back on your original payment method shortly.</p>
+      <p>We&rsquo;d love to have you at a different showing or the match instead. Head back to the site whenever you're ready to pick another time.</p>
+      <p style="margin-top:24px">Sorry again, and thank you for your patience, the joy project ♡</p>
     </div>
   `;
   await getResend().emails.send({
     from: getFrom(),
     to: params.to,
-    subject: "Your Joy Project order — refunded (showing sold out)",
+    subject: "Your Joy Project order: refunded (showing sold out)",
     html,
   });
 }
@@ -102,7 +102,7 @@ export async function sendContactNotification(params: {
     <div style="font-family:Arial,sans-serif;color:#102238">
       <h1 style="font-size:18px">New partner/sponsor inquiry</h1>
       <p><strong>${escapeHtml(params.name)}</strong> (${escapeHtml(params.email)})${
-    params.organization ? ` — ${escapeHtml(params.organization)}` : ""
+    params.organization ? `, ${escapeHtml(params.organization)}` : ""
   }</p>
       <p style="white-space:pre-wrap">${escapeHtml(params.message)}</p>
     </div>

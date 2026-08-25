@@ -23,13 +23,13 @@ export default function ContactForm() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error ?? "Something went wrong — please try again.");
+        setError(data.error ?? "Something went wrong, please try again.");
         setStatus("error");
       } else {
         setStatus("sent");
       }
     } catch {
-      setError("Something went wrong — please try again.");
+      setError("Something went wrong, please try again.");
       setStatus("error");
     } finally {
       setSubmitting(false);
@@ -39,7 +39,7 @@ export default function ContactForm() {
   if (status === "sent") {
     return (
       <div className="rounded-card border border-navy/10 bg-white p-6">
-        <p className="font-bold text-navy">Thanks — we&rsquo;ve got your message.</p>
+        <p className="font-bold text-navy">Thanks, we&rsquo;ve got your message.</p>
         <p className="mt-1 text-sm text-navy/70">The organizing team will get back to you directly.</p>
       </div>
     );

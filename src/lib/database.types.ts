@@ -1,6 +1,6 @@
 // Hand-written row shapes matching supabase/migrations/*.sql. The Supabase
 // client is created untyped (see lib/supabase.ts) and each query applies
-// `.returns<T>()` explicitly with these interfaces — the newest
+// `.returns<T>()` explicitly with these interfaces: the newest
 // @supabase/postgrest-js's type-level select-string parser has sharp edges
 // around generic `Database` schemas (default-typed mapped types collapsing
 // query results to `never`); `.returns<T>()` sidesteps that parser

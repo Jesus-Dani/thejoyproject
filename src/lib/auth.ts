@@ -1,5 +1,5 @@
 // Shared-password auth for /admin and /checkin (TRD §9). No accounts, no
-// sessions table — a signed cookie issued after a correct password check.
+// sessions table, a signed cookie issued after a correct password check.
 // Uses Web Crypto (`crypto.subtle`) rather than `node:crypto` so the same
 // code verifies cookies in both the Node API routes and the Edge middleware.
 
@@ -10,7 +10,7 @@ const COOKIE_NAMES: Record<AuthRole, string> = {
   checkin: "tjp_checkin_session",
 };
 
-const SESSION_TTL_SECONDS = 60 * 60 * 12; // 12h — a single event day's shift
+const SESSION_TTL_SECONDS = 60 * 60 * 12; // 12h, a single event day's shift
 
 export function cookieNameFor(role: AuthRole) {
   return COOKIE_NAMES[role];
@@ -22,7 +22,7 @@ function getSecret(): string {
   return secret;
 }
 
-// base64url helpers built on Uint8Array + btoa/atob rather than `Buffer` —
+// base64url helpers built on Uint8Array + btoa/atob rather than `Buffer`;
 // `Buffer` isn't reliably available in the Edge runtime this file also runs
 // in (via middleware.ts), while btoa/atob are standard in both.
 function bytesToBase64Url(bytes: Uint8Array): string {

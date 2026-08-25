@@ -19,7 +19,7 @@ const THEME = {
   green: { chip: "bg-green text-navy", panel: "bg-green/30" },
 };
 
-/** An event poster, not a SaaS card — image up top, paper-like info area below. */
+/** An event poster, not a SaaS card: image up top, paper-like info area below. */
 export default function EventCard({
   number,
   title,

@@ -64,7 +64,7 @@ export default function CheckinScanner() {
         const data = await res.json();
         setLastResult(data);
       } catch {
-        setLastResult({ result: "invalid", message: "Network error — try again" });
+        setLastResult({ result: "invalid", message: "Network error, try again" });
       } finally {
         busyRef.current = false;
         setBusy(false);
@@ -106,7 +106,7 @@ export default function CheckinScanner() {
         }
         rafRef.current = requestAnimationFrame(tick);
       } catch {
-        setCameraError("Couldn't access the camera — check browser permissions.");
+        setCameraError("Couldn't access the camera, check browser permissions.");
         setScanning(false);
       }
     }

@@ -11,7 +11,7 @@ const BACKGROUNDS: Record<string, string> = {
   pink: "bg-pink",
 };
 
-/** A small paper note with handwritten type — used sparingly, never for essential info. */
+/** A small paper note with handwritten type: used sparingly, never for essential info. */
 export default function HandwrittenNote({
   text,
   rotation = 3,

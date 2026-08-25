@@ -16,11 +16,11 @@ export const TICKET_TYPES: Array<{
     priceNgn: TICKET_PRICES.COMBO,
     includesMatch: true,
     includesShowing: true,
-    blurb: "Friday match + one Saturday showing of your choice",
+    blurb: "Friday match + one Saturday showing of your choice. Free drink and popcorn at the movies.",
   },
   {
     code: "FRIDAY_ONLY",
-    name: "Friday — Charity Match",
+    name: "Friday: Charity Match",
     priceNgn: TICKET_PRICES.FRIDAY_ONLY,
     includesMatch: true,
     includesShowing: false,
@@ -28,10 +28,10 @@ export const TICKET_TYPES: Array<{
   },
   {
     code: "SATURDAY_ONLY",
-    name: "Saturday — Barbie Marathon",
+    name: "Saturday: Barbie Marathon",
     priceNgn: TICKET_PRICES.SATURDAY_ONLY,
     includesMatch: false,
     includesShowing: true,
-    blurb: "One showing of your choice",
+    blurb: "One showing of your choice. Free drink and popcorn.",
   },
 ];

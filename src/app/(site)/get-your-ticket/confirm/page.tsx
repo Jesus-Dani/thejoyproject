@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import ConfirmStatus from "./ConfirmStatus";
 
-export const metadata: Metadata = { title: "Confirming your order — The Joy Project" };
+export const metadata: Metadata = { title: "Confirming your order: The Joy Project" };
 
 export default function ConfirmPage() {
   return (

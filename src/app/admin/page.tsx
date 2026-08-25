@@ -3,7 +3,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { NGN } from "@/lib/constants";
 import type { OrderRow, SessionRow, AdmissionRow } from "@/lib/database.types";
 
-export const metadata: Metadata = { title: "Admin — The Joy Project" };
+export const metadata: Metadata = { title: "Admin: The Joy Project" };
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
@@ -79,7 +79,7 @@ export default async function AdminPage() {
                 </td>
                 <td className="px-4 py-3 text-navy/70">{s.capacity ?? "Uncapped"}</td>
                 <td className="px-4 py-3 text-navy/70">{s.seats_sold}</td>
-                <td className="px-4 py-3 text-navy/70">{s.capacity === null ? "—" : Math.max(0, s.capacity - s.seats_sold)}</td>
+                <td className="px-4 py-3 text-navy/70">{s.capacity === null ? "N/A" : Math.max(0, s.capacity - s.seats_sold)}</td>
                 <td className="px-4 py-3 text-navy/70">{checkedInBySession.get(s.id) ?? 0}</td>
               </tr>
             ))}

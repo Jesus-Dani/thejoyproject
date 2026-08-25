@@ -4,7 +4,7 @@ import HandDrawnUnderline from "@/components/ui/HandDrawnUnderline";
 import HandwrittenNote from "@/components/ui/HandwrittenNote";
 import { IMAGES } from "@/lib/images";
 
-export const metadata: Metadata = { title: "Impact — The Joy Project" };
+export const metadata: Metadata = { title: "Impact: The Joy Project" };
 
 export default function ImpactPage() {
   return (
@@ -18,7 +18,7 @@ export default function ImpactPage() {
         <div className="space-y-5 text-lg leading-relaxed text-navy/80">
           <p>
             The Joy Project exists to create moments of happiness and
-            connection — and to use those moments to support and empower
+            connection, and to use those moments to support and empower
             children with disabilities.
           </p>
           <p>
@@ -28,7 +28,7 @@ export default function ImpactPage() {
           </p>
           <p>
             That&rsquo;s not a slogan we attach to a fun weekend to make it
-            feel worthwhile — it&rsquo;s the actual point. In partnership with{" "}
+            feel worthwhile, it&rsquo;s the actual point. In partnership with{" "}
             <strong className="text-navy">The Ezer Foundation</strong>, every
             ticket goes toward programs that give kids with disabilities the
             same shot at joy, friendship and participation that the rest of
@@ -36,14 +36,21 @@ export default function ImpactPage() {
           </p>
           <p>
             We&rsquo;re not asking you to feel sorry for anyone. We&rsquo;re
-            asking you to come have a genuinely good time — and in doing
+            asking you to come have a genuinely good time, and in doing
             that, you&rsquo;re already part of the work.
           </p>
         </div>
 
-        <div className="relative">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-card">
-            <Image src={IMAGES.impact.src} alt={IMAGES.impact.alt} fill sizes="(min-width:1024px) 600px, 100vw" className="object-cover" />
+        <div className="relative mx-auto w-full max-w-[320px] lg:mx-0">
+          <div className="overflow-hidden rounded-[4px] border-[6px] border-white bg-cream shadow-[0_18px_40px_rgba(16,34,56,0.22)]">
+            <Image
+              src={IMAGES.impact.src}
+              alt={IMAGES.impact.alt}
+              width={667}
+              height={1000}
+              sizes="320px"
+              className="h-auto w-full object-contain"
+            />
           </div>
           <HandwrittenNote
             text={"joy shared\nis joy\nmultiplied. :)"}

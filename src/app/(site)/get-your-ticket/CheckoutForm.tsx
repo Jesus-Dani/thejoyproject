@@ -45,7 +45,7 @@ export default function CheckoutForm() {
     fetch("/api/sessions")
       .then((r) => r.json())
       .then((data) => setSessions(data.sessions ?? []))
-      .catch(() => setError("Couldn't load live seat counts — you can still try checking out."))
+      .catch(() => setError("Couldn't load live seat counts. You can still try checking out."))
       .finally(() => setLoadingSessions(false));
   }, []);
 
@@ -84,13 +84,13 @@ export default function CheckoutForm() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error ?? "Something went wrong — please try again.");
+        setError(data.error ?? "Something went wrong, please try again.");
         setSubmitting(false);
         return;
       }
       window.location.href = data.authorizationUrl;
     } catch {
-      setError("Something went wrong — please try again.");
+      setError("Something went wrong, please try again.");
       setSubmitting(false);
     }
   }
@@ -197,7 +197,7 @@ export default function CheckoutForm() {
           </div>
           <div>
             <label htmlFor="buyerEmail" className="text-sm font-medium text-navy/70">
-              Email — your ticket QR codes go here
+              Email: your ticket QR codes go here
             </label>
             <input
               id="buyerEmail"
@@ -242,7 +242,7 @@ export default function CheckoutForm() {
         </button>
 
         <p className="text-center text-xs text-navy/50">
-          All sales are final — no refunds. See our{" "}
+          All sales are final, no refunds. See our{" "}
           <a href="/terms" className="underline">
             Terms &amp; FAQ
           </a>

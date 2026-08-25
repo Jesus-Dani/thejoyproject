@@ -26,7 +26,7 @@ async function paystackFetch(path: string, init: RequestInit) {
 }
 
 /**
- * Charges the ticket price only — no buyer-facing markup for Paystack's fee
+ * Charges the ticket price only, no buyer-facing markup for Paystack's fee
  * (product decision; see README "Payment fees" note). `amountNgn` is whole
  * naira; Paystack expects kobo.
  */
@@ -74,7 +74,7 @@ export async function refundTransaction(reference: string) {
 
 /**
  * Verifies `x-paystack-signature`: HMAC-SHA512 of the raw request body using
- * the secret key. Must run against the raw (unparsed) body — do not verify
+ * the secret key. Must run against the raw (unparsed) body; do not verify
  * against a re-serialized JSON object.
  */
 export function verifyWebhookSignature(rawBody: string, signatureHeader: string | null): boolean {

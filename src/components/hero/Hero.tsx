@@ -37,7 +37,7 @@ export default function Hero() {
 
         <div className="lg:col-start-1 lg:row-start-2">
           <p className="max-w-md text-lg leading-relaxed text-navy/80 sm:text-xl">
-            We&rsquo;re bringing back the things we loved growing up —
+            We&rsquo;re bringing back the things we loved growing up:
             movies, football, friends and feel-good chaos. All for a reason
             that matters.
           </p>

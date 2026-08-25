@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import HandDrawnUnderline from "@/components/ui/HandDrawnUnderline";
 
-export const metadata: Metadata = { title: "Terms & FAQ — The Joy Project" };
+export const metadata: Metadata = { title: "Terms & FAQ: The Joy Project" };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -21,7 +21,7 @@ export default function TermsPage() {
       <Section title="No refunds">
         <p>
           All ticket sales are final. We don&rsquo;t offer refunds, transfers,
-          or exchanges once a purchase is complete — please double-check
+          or exchanges once a purchase is complete, so please double-check
           your ticket type and showing selection before paying.
         </p>
         <p>
@@ -29,20 +29,20 @@ export default function TermsPage() {
           showing sells out in the seconds between you starting checkout and
           your payment clearing, we automatically refund you in full and
           email you to explain what happened. This isn&rsquo;t a general
-          refund option — it only ever triggers automatically, and only for
+          refund option; it only ever triggers automatically, and only for
           that specific situation.
         </p>
       </Section>
 
       <Section title="Tickets">
         <p>
-          Tickets are general admission — there&rsquo;s no assigned seating.
+          Tickets are general admission, and there&rsquo;s no assigned seating.
           A Saturday-inclusive ticket (single-day or combo) admits you to
           the one showing you selected at checkout, not all three.
         </p>
         <p>
           Your ticket is tied to the QR code emailed to you after payment.
-          It&rsquo;s single-use — once scanned at the door, it can&rsquo;t be
+          It&rsquo;s single-use: once scanned at the door, it can&rsquo;t be
           used again, so don&rsquo;t share screenshots of it.
         </p>
       </Section>
@@ -56,7 +56,7 @@ export default function TermsPage() {
           (e.g. Paystack for payment processing).
         </p>
         <p>
-          Payment details are handled entirely by Paystack — we never see or
+          Payment details are handled entirely by Paystack. We never see or
           store your card information.
         </p>
       </Section>
@@ -74,7 +74,7 @@ export default function TermsPage() {
         <p>
           <strong className="text-navy">Can I bring a friend without a ticket?</strong>
           <br />
-          Everyone attending needs their own ticket — quantity isn&rsquo;t
+          Everyone attending needs their own ticket. Quantity isn&rsquo;t
           capped, so grab as many as you need in one order.
         </p>
         <p>
@@ -86,7 +86,7 @@ export default function TermsPage() {
         <p>
           <strong className="text-navy">Is Meet &amp; Shop ticketed?</strong>
           <br />
-          No — the RUN Marketplace pop-up is free and open to everyone, no
+          No, the RUN Marketplace pop-up is free and open to everyone, no
           ticket required.
         </p>
       </Section>

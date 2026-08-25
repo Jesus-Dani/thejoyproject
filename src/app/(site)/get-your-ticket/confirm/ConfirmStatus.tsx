@@ -63,8 +63,8 @@ export default function ConfirmStatus() {
           <h1 className="text-3xl font-extrabold text-navy">Still confirming…</h1>
           <p className="mt-4 max-w-md text-navy/70">
             This is taking longer than usual. If Paystack already charged
-            you, your ticket confirmation will still arrive by email shortly
-            — no need to pay again.
+            you, your ticket confirmation will still arrive by email shortly.
+            No need to pay again.
           </p>
         </div>
       );
@@ -82,7 +82,7 @@ export default function ConfirmStatus() {
       <div>
         <h1 className="text-3xl font-extrabold text-navy">You&rsquo;re in, {data.buyerName.split(" ")[0]} 🎉</h1>
         <p className="mt-4 max-w-md text-navy/70">
-          {data.quantity} ticket{data.quantity > 1 ? "s" : ""} confirmed —{" "}
+          {data.quantity} ticket{data.quantity > 1 ? "s" : ""} confirmed:{" "}
           {NGN.format(data.totalAmountNgn)} total. Your QR code
           {data.quantity > 1 ? "s are" : " is"} on the way to your inbox.
         </p>
@@ -98,7 +98,7 @@ export default function ConfirmStatus() {
       <div>
         <h1 className="text-3xl font-extrabold text-navy">That showing just sold out</h1>
         <p className="mt-4 max-w-md text-navy/70">
-          You&rsquo;ve been refunded in full — check your email for details.
+          You&rsquo;ve been refunded in full. Check your email for details.
           Sorry about that! Feel free to pick a different showing.
         </p>
         <Link

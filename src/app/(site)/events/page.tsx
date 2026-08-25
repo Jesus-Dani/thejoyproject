@@ -7,7 +7,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { IMAGES } from "@/lib/images";
 import type { SessionRow } from "@/lib/database.types";
 
-export const metadata: Metadata = { title: "Events — The Joy Project" };
+export const metadata: Metadata = { title: "Events: The Joy Project" };
 export const revalidate = 0;
 
 export default async function EventsPage() {
@@ -45,7 +45,7 @@ export default async function EventsPage() {
               <div>{formatDate(match.event_date)}</div>
               <div>Kickoff {formatTime(match.start_time)}</div>
               <div>{match.venue}</div>
-              <div className="pt-1 font-semibold text-navy">Open admission — no seat limit</div>
+              <div className="pt-1 font-semibold text-navy">Open admission, no seat limit</div>
             </dl>
           )}
           <PrimaryButton label="Get a ticket" href="/get-your-ticket?type=FRIDAY_ONLY" variant="navy" className="mt-6" />
@@ -61,6 +61,7 @@ export default async function EventsPage() {
             {showings[0] && (
               <p className="mt-3 text-sm text-navy/70">{formatDate(showings[0].event_date)} · {showings[0].venue} · 100 seats per showing</p>
             )}
+            <p className="mt-2 text-sm font-semibold text-navy">Every movie ticket comes with a free drink and popcorn.</p>
           </div>
           <PrimaryButton label="Get a ticket" href="/get-your-ticket?type=SATURDAY_ONLY" variant="pink" />
         </div>
@@ -87,36 +88,48 @@ export default async function EventsPage() {
 
       <section id="also-happening" className="mt-14 scroll-mt-20">
         <h2 className="text-2xl font-extrabold text-navy">also happening</h2>
-        <p className="mt-1 text-navy/70">Free, no ticket required — come by between showings or before kickoff.</p>
+        <p className="mt-1 text-navy/70">Free, no ticket required. Come by between showings or before kickoff.</p>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="grid gap-6 overflow-hidden rounded-card border border-navy/10 bg-white sm:grid-cols-[1fr_1fr]">
             <div className="relative aspect-[4/3] sm:aspect-auto">
-              <Image src={IMAGES.meetShop.src} alt={IMAGES.meetShop.alt} fill sizes="(min-width:1024px) 420px, 100vw" className="object-cover" />
+              <Image src={IMAGES.meetShop.src} alt={IMAGES.meetShop.alt} fill sizes="(min-width:1024px) 340px, 100vw" className="object-cover" />
             </div>
             <div className="p-6 sm:pl-0">
               <h3 className="text-lg font-extrabold text-navy">Meet &amp; Shop</h3>
               <p className="mt-1 font-hand text-xl text-blue">a pop-up with RUN Marketplace</p>
               <p className="mt-3 text-sm leading-relaxed text-navy/70">
-                <strong className="text-navy">RUN Marketplace</strong> — our on-campus
-                commerce community — is running a two-day vendor pop-up at
+                <strong className="text-navy">RUN Marketplace</strong>, our on-campus
+                commerce community, is running a two-day vendor pop-up at
                 the venues. Come browse, shop, and support student
                 businesses.
               </p>
               <ul className="mt-3 space-y-1 text-sm text-navy/60">
-                <li>Friday, Sept 25 — alongside the Charity Match, Main Field</li>
-                <li>Saturday, Sept 26 — alongside the Barbie Marathon, SEAP</li>
+                <li>Friday, Sept 25: alongside the Charity Match, Main Field</li>
+                <li>Saturday, Sept 26: alongside the Barbie Marathon, SEAP</li>
               </ul>
             </div>
           </div>
 
-          <div className="rounded-card border border-navy/10 bg-white p-6">
-            <h3 className="text-lg font-extrabold text-navy">Food Court</h3>
-            <p className="mt-1 font-hand text-xl text-blue">bring your appetite</p>
-            <p className="mt-3 text-sm leading-relaxed text-navy/70">
-              A food court will be running both days — grab something to eat
-              between showings or before kickoff.
-            </p>
+          <div className="grid gap-6 overflow-hidden rounded-card border border-navy/10 bg-white p-6 sm:grid-cols-[auto_1fr] sm:items-center">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              {[IMAGES.foodCourt1, IMAGES.foodCourt2, IMAGES.foodCourt3, IMAGES.foodCourt4, IMAGES.foodCourt5].map((img) => (
+                <div
+                  key={img.src}
+                  className="relative h-16 w-16 overflow-hidden rounded-[3px] border-2 border-white shadow-[0_4px_10px_rgba(16,34,56,0.18)] sm:h-20 sm:w-20"
+                >
+                  <Image src={img.src} alt={img.alt} fill sizes="80px" className="object-cover" />
+                </div>
+              ))}
+            </div>
+            <div>
+              <h3 className="text-lg font-extrabold text-navy">Food Court</h3>
+              <p className="mt-1 font-hand text-xl text-blue">bring your appetite</p>
+              <p className="mt-3 text-sm leading-relaxed text-navy/70">
+                A food court will be running both days. Grab something to
+                eat between showings or before kickoff.
+              </p>
+            </div>
           </div>
         </div>
       </section>

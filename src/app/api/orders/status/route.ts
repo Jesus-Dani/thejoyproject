@@ -5,7 +5,7 @@ import type { OrderRow } from "@/lib/database.types";
 export const dynamic = "force-dynamic";
 
 // Read-only. The client-side Paystack redirect is never trusted as proof of
-// payment (TRD §5.1.4) — this just reflects whatever the webhook has
+// payment (TRD §5.1.4): this just reflects whatever the webhook has
 // written to `orders.payment_status`.
 export async function GET(req: Request) {
   const reference = new URL(req.url).searchParams.get("reference");

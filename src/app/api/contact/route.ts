@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     await sendContactNotification(parsed.data);
   } catch (err) {
     console.error("Contact notification failed", err);
-    return NextResponse.json({ error: "Could not send your message — please try again" }, { status: 502 });
+    return NextResponse.json({ error: "Could not send your message, please try again" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

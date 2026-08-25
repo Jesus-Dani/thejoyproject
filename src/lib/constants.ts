@@ -10,7 +10,7 @@ export const NAV_LINKS = [
 export const TICKET_CTA = { href: "/get-your-ticket", label: "Get Your Ticket" } as const;
 
 // Static event facts for marketing copy (Home, event cards). The Events page
-// and checkout flow pull live seat counts from /api/sessions — these are
+// and checkout flow pull live seat counts from /api/sessions, these are
 // display-only and mirror PRD §5 / the seeded `sessions` rows.
 export const MATCH_EVENT = {
   title: "CHARITY MATCH",
@@ -35,9 +35,9 @@ export const MOVIE_SHOWING_WINDOWS = [
 ] as const;
 
 export const TICKET_PRICES = {
-  COMBO: 1800,
+  COMBO: 2200,
   FRIDAY_ONLY: 1000,
-  SATURDAY_ONLY: 1000,
+  SATURDAY_ONLY: 1500,
 } as const;
 
 export const NGN = new Intl.NumberFormat("en-NG", {

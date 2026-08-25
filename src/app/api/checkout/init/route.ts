@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     if (showingError || !showing) {
       return NextResponse.json({ error: "Selected showing not found" }, { status: 400 });
     }
-    // Fail-fast UX check only — NOT the real capacity guard. The webhook's
+    // Fail-fast UX check only, NOT the real capacity guard. The webhook's
     // atomic UPDATE (TRD §4.2) is the actual source of truth at payment time.
     if (showing.capacity !== null && showing.seats_sold + input.quantity > showing.capacity) {
       return NextResponse.json({ error: "That showing doesn't have enough seats left" }, { status: 409 });
@@ -89,6 +89,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ authorizationUrl: tx.authorization_url });
   } catch {
     await supabase.from("orders").update({ payment_status: "failed" }).eq("id", order.id);
-    return NextResponse.json({ error: "Could not start payment — please try again" }, { status: 502 });
+    return NextResponse.json({ error: "Could not start payment, please try again" }, { status: 502 });
   }
 }

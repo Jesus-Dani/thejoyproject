@@ -15,7 +15,7 @@ const VARIANTS: Record<string, string> = {
   ghost: "bg-transparent text-navy border-2 border-navy hover:bg-navy/5",
 };
 
-/** Squared-off, paper-like button — never an oversized pill. */
+/** Squared-off, paper-like button: never an oversized pill. */
 export default function PrimaryButton({
   label,
   href,

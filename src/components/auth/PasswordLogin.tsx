@@ -36,7 +36,7 @@ export default function PasswordLogin({
       router.push(redirectTo);
       router.refresh();
     } catch {
-      setError("Something went wrong — please try again.");
+      setError("Something went wrong, please try again.");
       setSubmitting(false);
     }
   }

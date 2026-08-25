@@ -3,7 +3,7 @@ import Image from "next/image";
 import HandDrawnUnderline from "@/components/ui/HandDrawnUnderline";
 import { IMAGES } from "@/lib/images";
 
-export const metadata: Metadata = { title: "About — The Joy Project" };
+export const metadata: Metadata = { title: "About: The Joy Project" };
 
 export default function AboutPage() {
   return (
@@ -14,15 +14,24 @@ export default function AboutPage() {
       </header>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-card lg:order-2">
-          <Image src={IMAGES.about.src} alt={IMAGES.about.alt} fill sizes="(min-width:1024px) 600px, 100vw" className="object-cover" />
+        <div className="relative mx-auto w-full max-w-[320px] lg:order-2 lg:mx-0">
+          <div className="overflow-hidden rounded-[4px] border-[6px] border-white bg-cream shadow-[0_18px_40px_rgba(16,34,56,0.22)]">
+            <Image
+              src={IMAGES.about.src}
+              alt={IMAGES.about.alt}
+              width={854}
+              height={1280}
+              sizes="320px"
+              className="h-auto w-full object-contain"
+            />
+          </div>
         </div>
 
         <div className="space-y-5 text-lg leading-relaxed text-navy/80 lg:order-1">
           <p>
             The Joy Project started as a simple idea: bring back the things
-            that made growing up on campus feel good — movie nights, football
-            with your friends, an excuse to be a little ridiculous together —
+            that made growing up on campus feel good, movie nights, football
+            with your friends, an excuse to be a little ridiculous together,
             and point that energy somewhere that matters.
           </p>
           <p>
@@ -35,7 +44,7 @@ export default function AboutPage() {
             We&rsquo;re running both events in partnership with{" "}
             <strong className="text-navy">The Ezer Foundation</strong>, which
             supports and empowers children with disabilities. Every ticket
-            sold helps fund that work — not as an afterthought, but as the
+            sold helps fund that work, not as an afterthought, but as the
             actual reason the two days exist.
           </p>
           <p>
