@@ -85,6 +85,42 @@ export default async function EventsPage() {
         </div>
       </section>
 
+      <section id="also-happening" className="mt-14 scroll-mt-20">
+        <h2 className="text-2xl font-extrabold text-navy">also happening</h2>
+        <p className="mt-1 text-navy/70">Free, no ticket required — come by between showings or before kickoff.</p>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+          <div className="grid gap-6 overflow-hidden rounded-card border border-navy/10 bg-white sm:grid-cols-[1fr_1fr]">
+            <div className="relative aspect-[4/3] sm:aspect-auto">
+              <Image src={IMAGES.meetShop.src} alt={IMAGES.meetShop.alt} fill sizes="(min-width:1024px) 420px, 100vw" className="object-cover" />
+            </div>
+            <div className="p-6 sm:pl-0">
+              <h3 className="text-lg font-extrabold text-navy">Meet &amp; Shop</h3>
+              <p className="mt-1 font-hand text-xl text-blue">a pop-up with RUN Marketplace</p>
+              <p className="mt-3 text-sm leading-relaxed text-navy/70">
+                <strong className="text-navy">RUN Marketplace</strong> — our on-campus
+                commerce community — is running a two-day vendor pop-up at
+                the venues. Come browse, shop, and support student
+                businesses.
+              </p>
+              <ul className="mt-3 space-y-1 text-sm text-navy/60">
+                <li>Friday, Sept 25 — alongside the Charity Match, Main Field</li>
+                <li>Saturday, Sept 26 — alongside the Barbie Marathon, SEAP</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="rounded-card border border-navy/10 bg-white p-6">
+            <h3 className="text-lg font-extrabold text-navy">Food Court</h3>
+            <p className="mt-1 font-hand text-xl text-blue">bring your appetite</p>
+            <p className="mt-3 text-sm leading-relaxed text-navy/70">
+              A food court will be running both days — grab something to eat
+              between showings or before kickoff.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <div className="mt-14 text-center">
         <Link href="/terms" className="text-sm font-semibold text-navy/60 underline underline-offset-4 hover:text-navy">
           Read the no-refunds policy and FAQ →
