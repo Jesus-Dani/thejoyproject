@@ -30,7 +30,7 @@ export default function AboutPage() {
         <div className="space-y-5 text-lg leading-relaxed text-navy/80 lg:order-1">
           <p>
             The Joy Project started as a simple idea: bring back the things
-            that made growing up on campus feel good, movie nights, football
+            that made growing up feel good, movie nights, football
             with your friends, an excuse to be a little ridiculous together,
             and point that energy somewhere that matters.
           </p>

@@ -13,22 +13,11 @@ export default function Hero() {
             <br />
             when joy
             <br />
-            was this
+            was barbie and
             <br />
-            easy?
+            playing ball?
           </h1>
           <HandDrawnUnderline color="pink" className="mt-3 w-40" />
-
-          <p className="mt-8 max-w-xs font-hand text-2xl leading-snug text-blue">
-            <span aria-hidden="true" className="mr-1">
-              ↳
-            </span>
-            and yes,
-            <br />
-            Barbie is
-            <br />
-            involved. <span className="text-pink">♥</span>
-          </p>
         </div>
 
         <div className="lg:col-start-2 lg:row-start-1 lg:row-span-2">
