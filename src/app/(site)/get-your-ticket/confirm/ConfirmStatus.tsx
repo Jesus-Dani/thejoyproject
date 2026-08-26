@@ -80,11 +80,13 @@ export default function ConfirmStatus() {
   if (data.status === "success") {
     return (
       <div>
-        <h1 className="text-3xl font-extrabold text-navy">You&rsquo;re in, {data.buyerName.split(" ")[0]} 🎉</h1>
+        <h1 className="text-3xl font-extrabold text-navy">Thank you for your purchase</h1>
+        <p className="mt-4 max-w-md text-navy/70">
+          Your ticket will be sent soon.
+        </p>
         <p className="mt-4 max-w-md text-navy/70">
           {data.quantity} ticket{data.quantity > 1 ? "s" : ""} confirmed:{" "}
-          {NGN.format(data.totalAmountNgn)} total. Your QR code
-          {data.quantity > 1 ? "s are" : " is"} on the way to your inbox.
+          {NGN.format(data.totalAmountNgn)} total.
         </p>
         <Link href="/" className="mt-8 inline-block font-bold text-navy underline decoration-blue decoration-2 underline-offset-4">
           Back to home

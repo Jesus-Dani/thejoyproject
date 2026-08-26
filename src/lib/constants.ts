@@ -16,7 +16,7 @@ export const MATCH_EVENT = {
   title: "CHARITY MATCH",
   subtitle: "pick your team. bring the noise.",
   date: "Friday, September 25, 2026",
-  time: "Kickoff 3:00 PM",
+  time: "Kickoff 1:00 PM",
   venue: "Main Field",
 } as const;
 
