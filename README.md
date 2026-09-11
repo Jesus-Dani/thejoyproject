@@ -30,7 +30,7 @@ npm run dev
 
 | Variable | Where to get it |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` locally; your production URL once deployed |
+| `SITE_URL` | `http://localhost:3000` locally; your production URL once deployed (e.g. `https://thejoyproject.vercel.app`) — server-side only, used to build the Paystack redirect URL |
 | `SUPABASE_URL` | Supabase project → Settings → API |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase project → Settings → API → **service_role** secret (not the publishable/anon key — this app has no buyer auth, so the DB is only ever touched server-side) |
 | `PAYSTACK_SECRET_KEY` | Paystack dashboard → Settings → API Keys & Webhooks. Use a **test** key for local dev/Vercel previews, a **live** key only in production |
@@ -98,8 +98,8 @@ than guessed:
   labeled placeholder graphics, referenced through the single
   `src/lib/images.ts` config. Swap files there once real photos exist; no
   layout code needs to change.
-- **Domain name** — not yet registered; `NEXT_PUBLIC_SITE_URL` needs
-  updating once one exists.
+- **Domain name** — not yet registered; `SITE_URL` needs updating once
+  one exists.
 - **Social links** (`src/lib/social.ts`) and the confirmation email's
   "from" address are placeholders — no real handles/domain were provided.
 

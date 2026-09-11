@@ -76,7 +76,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Could not create order" }, { status: 500 });
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = process.env.SITE_URL ?? "http://localhost:3000";
 
   try {
     const tx = await initializeTransaction({
