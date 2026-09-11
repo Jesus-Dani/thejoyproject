@@ -32,7 +32,8 @@ export default function CheckoutForm() {
     TICKET_TYPES.some((t) => t.code === initialType) ? initialType : "COMBO"
   );
   const [showingId, setShowingId] = useState<string>("");
-  const [quantity, setQuantity] = useState(1);
+  const [quantityInput, setQuantityInput] = useState("1");
+  const quantity = Math.min(20, Math.max(1, parseInt(quantityInput, 10) || 1));
   const [buyerName, setBuyerName] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerPhone, setBuyerPhone] = useState("");
@@ -175,8 +176,9 @@ export default function CheckoutForm() {
             type="number"
             min={1}
             max={20}
-            value={quantity}
-            onChange={(e) => setQuantity(Math.min(20, Math.max(1, Number(e.target.value) || 1)))}
+            value={quantityInput}
+            onChange={(e) => setQuantityInput(e.target.value)}
+            onBlur={() => setQuantityInput(String(quantity))}
             className="rounded-button border border-navy/20 bg-white px-3 py-2 text-navy"
           />
         </div>
