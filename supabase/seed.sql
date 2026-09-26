@@ -1,9 +1,13 @@
 -- The Joy Project: seed data (run once against a fresh database)
 
+-- COMBO and FRIDAY_ONLY are kept for historical orders' FK reference but are
+-- no longer sold (see checkout/init/route.ts and ticketTypes.ts) — the
+-- Charity Match already happened. FRIDAY_ONLY is renamed "Donation" so past
+-- ₦1,000 match orders read that way in admin/exports.
 insert into ticket_types (code, name, price_ngn, includes_match, includes_showing)
 values
   ('COMBO', '2-Day Combo', 2200, true, true),
-  ('FRIDAY_ONLY', 'Friday Match: Single Day', 1000, true, false),
+  ('FRIDAY_ONLY', 'Donation', 1000, true, false),
   ('SATURDAY_ONLY', 'Saturday Showing: Single Day', 1500, false, true)
 on conflict (code) do nothing;
 

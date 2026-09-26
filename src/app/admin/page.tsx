@@ -44,11 +44,14 @@ export default async function AdminPage() {
 
   const customers = (rawCustomers ?? []).map((c) => {
     const showingName = c.sessions?.name;
+    // No showing on the order means it's a match-only order — reflects
+    // ticket_types.name directly, which is "Donation" for the old
+    // FRIDAY_ONLY type now that the match has already happened.
     const booking = showingName
       ? c.ticket_types?.includes_match
         ? `Match + ${showingName}`
         : showingName
-      : "Charity Match";
+      : (c.ticket_types?.name ?? "Charity Match");
     return {
       id: c.id,
       buyerName: c.buyer_name,

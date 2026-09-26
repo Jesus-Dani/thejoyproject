@@ -2,6 +2,10 @@ import { TICKET_PRICES } from "./constants";
 
 export type TicketTypeCode = "COMBO" | "FRIDAY_ONLY" | "SATURDAY_ONLY";
 
+// The Charity Match (Friday) already happened, so COMBO and FRIDAY_ONLY are
+// no longer sold — only the Saturday showing ticket remains purchasable.
+// Both rows still exist in the `ticket_types` table (existing orders
+// reference them by FK) and checkout/init rejects them server-side too.
 export const TICKET_TYPES: Array<{
   code: TicketTypeCode;
   name: string;
@@ -10,22 +14,6 @@ export const TICKET_TYPES: Array<{
   includesShowing: boolean;
   blurb: string;
 }> = [
-  {
-    code: "COMBO",
-    name: "2-Day Combo",
-    priceNgn: TICKET_PRICES.COMBO,
-    includesMatch: true,
-    includesShowing: true,
-    blurb: "Friday match + one Saturday showing of your choice. Free drink and popcorn at the movies.",
-  },
-  {
-    code: "FRIDAY_ONLY",
-    name: "Friday: Charity Match",
-    priceNgn: TICKET_PRICES.FRIDAY_ONLY,
-    includesMatch: true,
-    includesShowing: false,
-    blurb: "Match day only",
-  },
   {
     code: "SATURDAY_ONLY",
     name: "Saturday: Barbie Marathon",

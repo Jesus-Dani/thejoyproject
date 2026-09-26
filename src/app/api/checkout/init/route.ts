@@ -13,6 +13,16 @@ export async function POST(req: Request) {
   }
   const input = parsed.data;
 
+  // The Charity Match (Friday) already happened — Combo and Friday-only
+  // tickets are no longer sold. Checked here too, not just hidden from the
+  // UI, since this endpoint could otherwise be hit directly.
+  if (input.ticketTypeCode === "COMBO" || input.ticketTypeCode === "FRIDAY_ONLY") {
+    return NextResponse.json(
+      { error: "That ticket type is no longer available — the Charity Match has already taken place." },
+      { status: 400 }
+    );
+  }
+
   const supabase = getSupabaseAdmin();
 
   const { data: ticketTypeData, error: ticketTypeError } = await supabase

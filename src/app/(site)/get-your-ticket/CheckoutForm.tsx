@@ -26,10 +26,10 @@ function formatTime(t: string) {
 
 export default function CheckoutForm() {
   const searchParams = useSearchParams();
-  const initialType = (searchParams.get("type") as TicketTypeCode) ?? "COMBO";
+  const initialType = (searchParams.get("type") as TicketTypeCode) ?? TICKET_TYPES[0].code;
 
   const [ticketTypeCode, setTicketTypeCode] = useState<TicketTypeCode>(
-    TICKET_TYPES.some((t) => t.code === initialType) ? initialType : "COMBO"
+    TICKET_TYPES.some((t) => t.code === initialType) ? initialType : TICKET_TYPES[0].code
   );
   const [showingId, setShowingId] = useState<string>("");
   const [quantityInput, setQuantityInput] = useState("1");
@@ -104,11 +104,11 @@ export default function CheckoutForm() {
       <form onSubmit={handleSubmit} className="mt-10 space-y-8">
         <fieldset>
           <legend className="text-sm font-bold uppercase tracking-wide text-navy/60">Ticket type</legend>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          <div className="mt-3 flex flex-wrap gap-3">
             {TICKET_TYPES.map((t) => (
               <label
                 key={t.code}
-                className={`cursor-pointer rounded-card border-2 p-4 transition-colors ${
+                className={`w-full max-w-xs cursor-pointer rounded-card border-2 p-4 transition-colors ${
                   ticketTypeCode === t.code ? "border-navy bg-navy/5" : "border-navy/15"
                 }`}
               >
