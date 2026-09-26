@@ -15,12 +15,16 @@ type OrderStatusResponse = {
 };
 
 const POLL_INTERVAL_MS = 2500;
-const TIMEOUT_MS = 90_000;
+// Bank transfer / USSD payments can take several minutes for Paystack to
+// confirm (unlike card payments, which resolve in seconds) — a short
+// timeout here reads as "broken" to a buyer who genuinely just paid slowly.
+const TIMEOUT_MS = 5 * 60_000;
 
 export default function ConfirmStatus() {
   const reference = useSearchParams().get("reference");
   const [data, setData] = useState<OrderStatusResponse | null>(null);
   const [timedOut, setTimedOut] = useState(false);
+  const [resumeKey, setResumeKey] = useState(0);
 
   useEffect(() => {
     if (!reference) return;
@@ -46,11 +50,12 @@ export default function ConfirmStatus() {
       setTimeout(poll, POLL_INTERVAL_MS);
     }
 
+    setTimedOut(false);
     poll();
     return () => {
       cancelled = true;
     };
-  }, [reference]);
+  }, [reference, resumeKey]);
 
   if (!reference) {
     return <p className="text-navy/70">Missing order reference.</p>;
@@ -62,17 +67,28 @@ export default function ConfirmStatus() {
         <div>
           <h1 className="text-3xl font-extrabold text-navy">Still confirming…</h1>
           <p className="mt-4 max-w-md text-navy/70">
-            This is taking longer than usual. If Paystack already charged
-            you, your ticket confirmation will still arrive by email shortly.
-            No need to pay again.
+            This is taking longer than usual — common with bank transfer or
+            USSD payments, which can take a few minutes to clear. Please
+            don&rsquo;t pay again. Tap below to check once more, or come back
+            to this page later using the same link.
           </p>
+          <button
+            type="button"
+            onClick={() => setResumeKey((k) => k + 1)}
+            className="mt-6 rounded-button bg-navy px-6 py-3 text-sm font-bold text-cream hover:bg-navy/90"
+          >
+            Check again
+          </button>
         </div>
       );
     }
     return (
       <div>
         <h1 className="text-3xl font-extrabold text-navy">Confirming your payment…</h1>
-        <p className="mt-4 text-navy/70">Hang tight, this only takes a moment.</p>
+        <p className="mt-4 text-navy/70">
+          Hang tight — this is usually quick, but bank transfer or USSD
+          payments can take a few minutes.
+        </p>
       </div>
     );
   }
