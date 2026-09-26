@@ -15,8 +15,10 @@ values
   ('match', 'Charity Match', null, '2026-09-25', '13:00', '15:00', 'Main Field', null, 1);
 
 -- Saturday, Sept 26 2026: Barbie Movie Marathon, SEAP, 100 seats/showing.
+-- The original 10:00 AM start was cancelled and all three showings pushed
+-- later same-day; times below are the corrected schedule.
 insert into sessions (type, name, film_title, event_date, start_time, end_time, venue, capacity, display_order)
 values
-  ('movie_showing', 'Showing 1', 'Barbie in the Nutcracker', '2026-09-26', '10:00', '12:20', 'SEAP', 100, 2),
-  ('movie_showing', 'Showing 2', 'Barbie of Swan Lake', '2026-09-26', '12:35', '14:55', 'SEAP', 100, 3),
-  ('movie_showing', 'Showing 3', 'Barbie and the Secret Door', '2026-09-26', '15:10', '17:30', 'SEAP', 100, 4);
+  ('movie_showing', 'Showing 1', 'Barbie in the Nutcracker', '2026-09-26', '12:00', '13:30', 'SEAP', 100, 2),
+  ('movie_showing', 'Showing 2', 'Barbie of Swan Lake', '2026-09-26', '13:40', '14:50', 'SEAP', 100, 3),
+  ('movie_showing', 'Showing 3', 'Barbie and the Secret Door', '2026-09-26', '15:00', '16:30', 'SEAP', 100, 4);

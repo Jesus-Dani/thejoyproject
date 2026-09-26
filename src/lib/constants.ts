@@ -24,14 +24,14 @@ export const MOVIE_EVENT = {
   title: "BARBIE MOVIE MARATHON",
   subtitle: "popcorn. pink. questionable singing.",
   date: "Saturday, September 26, 2026",
-  time: "Showings from 10:00 AM",
+  time: "Showings from 12:00 PM",
   venue: "SEAP",
 } as const;
 
 export const MOVIE_SHOWING_WINDOWS = [
-  { name: "Showing 1", window: "10:00 AM – 12:20 PM" },
-  { name: "Showing 2", window: "12:35 PM – 2:55 PM" },
-  { name: "Showing 3", window: "3:10 PM – 5:30 PM" },
+  { name: "Showing 1", window: "12:00 PM – 1:30 PM" },
+  { name: "Showing 2", window: "1:40 PM – 2:50 PM" },
+  { name: "Showing 3", window: "3:00 PM – 4:30 PM" },
 ] as const;
 
 export const TICKET_PRICES = {

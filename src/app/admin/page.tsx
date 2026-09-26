@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { NGN } from "@/lib/constants";
 import type { OrderRow, SessionRow, AdmissionRow } from "@/lib/database.types";
+import CustomersTable from "./CustomersTable";
 
 export const metadata: Metadata = { title: "Admin: The Joy Project" };
 export const dynamic = "force-dynamic";
@@ -20,14 +21,16 @@ export default async function AdminPage() {
     supabase.from("admissions").select("session_id, checked_in_at"),
     supabase
       .from("orders")
-      .select("id, buyer_name, buyer_email, buyer_phone, quantity, total_amount_ngn, paid_at, ticket_types(name)")
+      .select(
+        "id, buyer_name, buyer_email, buyer_phone, quantity, total_amount_ngn, paid_at, ticket_types(name, includes_match), sessions(name)"
+      )
       .eq("payment_status", "success")
       .order("paid_at", { ascending: false }),
   ]);
   const sessions = sessionsData as unknown as SessionRow[] | null;
   const orders = ordersData as unknown as Pick<OrderRow, "total_amount_ngn" | "payment_status">[] | null;
   const admissions = admissionsData as unknown as Pick<AdmissionRow, "session_id" | "checked_in_at">[] | null;
-  const customers = customersData as unknown as Array<{
+  const rawCustomers = customersData as unknown as Array<{
     id: string;
     buyer_name: string;
     buyer_email: string;
@@ -35,8 +38,27 @@ export default async function AdminPage() {
     quantity: number;
     total_amount_ngn: number;
     paid_at: string | null;
-    ticket_types: { name: string } | null;
+    ticket_types: { name: string; includes_match: boolean } | null;
+    sessions: { name: string } | null;
   }> | null;
+
+  const customers = (rawCustomers ?? []).map((c) => {
+    const showingName = c.sessions?.name;
+    const booking = showingName
+      ? c.ticket_types?.includes_match
+        ? `Match + ${showingName}`
+        : showingName
+      : "Charity Match";
+    return {
+      id: c.id,
+      buyerName: c.buyer_name,
+      buyerEmail: c.buyer_email,
+      buyerPhone: c.buyer_phone,
+      booking,
+      quantity: c.quantity,
+      totalAmountNgn: Number(c.total_amount_ngn),
+    };
+  });
 
   const checkedInBySession = new Map<string, number>();
   for (const a of admissions ?? []) {
@@ -104,41 +126,11 @@ export default async function AdminPage() {
       </div>
 
       <h2 className="mt-10 text-lg font-extrabold text-navy">Customers</h2>
-      <p className="mt-1 text-sm text-navy/60">Confirmed orders only.</p>
-      <div className="mt-4 overflow-x-auto rounded-card border border-navy/10 bg-white">
-        <table className="w-full min-w-[720px] text-left text-sm">
-          <thead className="border-b border-navy/10 text-navy/60">
-            <tr>
-              <th className="px-4 py-3 font-semibold">Name</th>
-              <th className="px-4 py-3 font-semibold">Email</th>
-              <th className="px-4 py-3 font-semibold">Phone</th>
-              <th className="px-4 py-3 font-semibold">Ticket</th>
-              <th className="px-4 py-3 font-semibold">Qty</th>
-              <th className="px-4 py-3 font-semibold">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(customers ?? []).length === 0 ? (
-              <tr>
-                <td className="px-4 py-6 text-navy/50" colSpan={6}>
-                  No confirmed orders yet.
-                </td>
-              </tr>
-            ) : (
-              (customers ?? []).map((c) => (
-                <tr key={c.id} className="border-b border-navy/5 last:border-0">
-                  <td className="px-4 py-3 font-medium text-navy">{c.buyer_name}</td>
-                  <td className="px-4 py-3 text-navy/70">{c.buyer_email}</td>
-                  <td className="px-4 py-3 text-navy/70">{c.buyer_phone}</td>
-                  <td className="px-4 py-3 text-navy/70">{c.ticket_types?.name ?? ""}</td>
-                  <td className="px-4 py-3 text-navy/70">{c.quantity}</td>
-                  <td className="px-4 py-3 text-navy/70">{NGN.format(c.total_amount_ngn)}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+      <p className="mt-1 text-sm text-navy/60">
+        Confirmed orders only. Click a column header to sort, e.g. by
+        Booking, to group everyone attending the same showing or the match.
+      </p>
+      <CustomersTable customers={customers} />
     </div>
   );
 }
